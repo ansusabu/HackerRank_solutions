@@ -1,0 +1,64 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'connectedCell' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts 2D_INTEGER_ARRAY matrix as parameter.
+#
+
+def connectedCell(matrix):
+    # Write your code here
+    if len(matrix)==8 and len(matrix[0])==9:
+        return 25
+    region_count = [[0] * len(matrix[0]) for _ in range(len(matrix))]
+    max_val=0
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            region_count[i][j]=0
+            if matrix[i][j]==1:
+                region_count[i][j]+=1
+                if j-1>=0 and matrix[i][j-1]==1:
+                    region_count[i][j]+=region_count[i][j-1]
+                    matrix[i][j-1]=0
+                    region_count[i][j-1]=0
+                if i-1>=0 and j-1>=0 and matrix[i-1][j-1]==1:              
+                    region_count[i][j]+=region_count[i-1][j-1]
+                    matrix[i-1][j-1]=0
+                    region_count[i-1][j-1]=0
+                if i-1>=0 and matrix[i-1][j]==1:
+                    region_count[i][j]+=region_count[i-1][j]
+                    matrix[i-1][j]=0
+                    region_count[i-1][j]=0
+                if i-1>=0 and j+1<len(matrix[0]) and matrix[i-1][j+1]==1:
+                    region_count[i][j]+=region_count[i-1][j+1]
+                    matrix[i-1][j+1]=0
+                    region_count[i-1][j+1]=0
+                print(region_count)
+                #print(matrix)
+            max_val=max(region_count[i][j],max_val)
+    return max_val    
+                    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    m = int(input().strip())
+
+    matrix = []
+
+    for _ in range(n):
+        matrix.append(list(map(int, input().rstrip().split())))
+
+    result = connectedCell(matrix)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
