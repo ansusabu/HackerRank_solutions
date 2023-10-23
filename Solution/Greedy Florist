@@ -1,0 +1,36 @@
+'''
+A group of friends want to buy a bouquet of flowers. The florist wants to maximize his number of new customers and the money he makes. To do this, he decides he'll multiply the price of each flower by the number of that customer's previously purchased flowers plus . The first flower will be original price, , the next will be  and so on.
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the getMinimumCost function below.
+def getMinimumCost(k, c):
+    c.sort(reverse=True)
+    price = 0
+    for i in range(len(c)):
+        price+=((i//k)+1)*c[i]
+    return price
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    c = list(map(int, input().rstrip().split()))
+
+    minimumCost = getMinimumCost(k, c)
+
+    fptr.write(str(minimumCost) + '\n')
+
+    fptr.close()
