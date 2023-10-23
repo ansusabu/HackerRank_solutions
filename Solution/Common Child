@@ -1,0 +1,50 @@
+'''
+A string is said to be a child of a another string if it can be formed by deleting 0 or more characters from the other string. Letters cannot be rearranged. Given two strings of equal length, what's the longest string that can be constructed such that it is a child of both?
+'''
+
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'commonChild' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. STRING s1
+#  2. STRING s2
+#
+
+def commonChild(s1, s2):
+    # Write your code here
+    a, b = len(s1), len(s2)
+    lcs_matrix= [[0] * (a+ 1) for i in range(b+ 1)] #used LC algorithm to solve this problem
+
+    for i in range(a):
+        for j in range(b):
+            if s1[i] == s2[j]:
+                lcs_matrix[i + 1][j + 1] = lcs_matrix[i][j] + 1
+            else:
+                lcs_matrix[i + 1][j + 1] = max(lcs_matrix[i + 1][j], lcs_matrix[i][j + 1])
+
+    return lcs_matrix[a][b]     
+            
+            
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s1 = input()
+
+    s2 = input()
+
+    result = commonChild(s1, s2)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
