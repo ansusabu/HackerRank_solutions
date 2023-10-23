@@ -1,0 +1,113 @@
+'''
+You are given a 2D matrix of dimension  and a positive integer . You have to rotate the matrix  times and print the resultant matrix. Rotation should be in anti-clockwise direction.
+
+Rotation of a  matrix is represented by the following figure. Note that in one rotation, you have to shift elements by one step only.
+'''
+
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'matrixRotation' function below.
+#
+# The function accepts following parameters:
+#  1. 2D_INTEGER_ARRAY matrix
+#  2. INTEGER r
+# 
+def matrixRotation(matrix, r):
+    # Write your code here    
+    row=len(matrix)
+    col=len(matrix[0])
+    row_dup=row-1
+    col_dup=col-1
+    x=0
+    y=0
+    j=0
+    i=0
+    a=0
+    b=0
+    for k in range(row//2):
+        dup=[]
+        for i in range(x,col_dup):
+            dup.append(matrix[j][i])
+        i=i+1
+        for j in range(y,row_dup):
+            dup.append(matrix[j][i])
+        j=j+1    
+        for i in range(col_dup,x,-1):
+            dup.append(matrix[j][i])
+        i=i-1
+        for j in range(row_dup,y,-1):
+            dup.append(matrix[j][i])
+        j=j-1
+        
+        #print(dup)
+        
+        positions = r % len(dup)
+        #positions = len(dup) - positions
+        dup = dup[positions:] + dup[:positions]
+        
+        
+        #print(dup)
+        #print("xxxxxxxxxxxx")
+        h=0
+        #print(f'yyyyyy- {row_dup} {col_dup}')
+        for a in range(x,col_dup):
+            matrix[b][a]=dup[h]
+            h+=1
+            #print(f'{b} {a}')
+        a+=1
+        for b in range(y,row_dup):
+            matrix[b][a]=dup[h]
+            h+=1
+            #print(f'{b} {a}')
+        b+=1
+        for a in range(col_dup,x,-1):
+            matrix[b][a]=dup[h]
+            h+=1
+            #print(f'{b} {a}')
+        a-=1
+        for b in range(row_dup,y,-1):
+            matrix[b][a]=dup[h]
+            h+=1
+            #print(f'{b} {a}')
+        #print(f'xxxxxx- {row_dup} {col_dup}')
+        b-=1            
+        col_dup-=1
+        row_dup-=1
+        i+=1
+        j+=1
+        x=x+1
+        y=y+1 
+        a+=1
+        b+=1
+      
+    for i in matrix:
+        for j in i:
+            print(j, end=' ')  # Use ' ' as the separator
+        print()
+        
+    #print(dup)
+        
+
+if __name__ == '__main__':
+    first_multiple_input = input().rstrip().split()
+
+    m = int(first_multiple_input[0])
+
+    n = int(first_multiple_input[1])
+
+    r = int(first_multiple_input[2])
+
+    matrix = []
+
+    for _ in range(m):
+        matrix.append(list(map(int, input().rstrip().split())))
+
+    matrixRotation(matrix, r)
