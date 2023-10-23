@@ -1,0 +1,84 @@
+'''
+Madison is a little girl who is fond of toys. Her friend Mason works in a toy manufacturing factory . Mason has a 2D board  of size  with  rows and  columns. The board is divided into cells of size  with each cell indicated by its coordinate . The cell  has an integer  written on it. To create the toy Mason stacks  number of cubes of size  on the cell .
+
+Given the description of the board showing the values of  and that the price of the toy is equal to the 3d surface area find the price of the toy.
+
+Input Format
+
+The first line contains two space-separated integers  and  the height and the width of the board respectively.
+
+The next  lines contains  space separated integers. The  integer in  line denotes .
+'''
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'surfaceArea' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts 2D_INTEGER_ARRAY A as parameter.
+#
+
+def surfaceArea(A):
+    # Write your code here
+    if len(A)==1 and len(A[0])==1:
+        return 4*A[0][0]+2
+    sa=len(A)*len(A[0])*2
+    if len(A)==1 or len(A[0])==1:
+        for i in range(len(A)):
+            for j in range(len(A[i])):
+                if (i==0 and j==0) or (i==0 and j==len(A[i])-1) or (i==len(A)-1 and j==0) or (i==len(A)-1 and j==len(A[i])-1):
+                    sa+=A[i][j]*3 
+                elif i==0 or j==0 or i==len(A)-1 or j==len(A[i])-1:
+                    sa+=A[i][j]*2
+                if j+1<len(A[0]) and A[i][j]>A[i][j+1]: 
+                    sa+=A[i][j]-A[i][j+1]
+                if j-1>=0 and A[i][j]>A[i][j-1]:
+                    sa+=A[i][j]-A[i][j-1]
+                if i+1<len(A) and A[i][j]>A[i+1][j]:
+                    sa+=A[i][j]-A[i+1][j]
+                if i-1>=0 and A[i][j]>A[i-1][j]:
+                    sa+=A[i][j]-A[i-1][j]
+        return (sa)                 
+    
+    for i in range(len(A)):
+        for j in range(len(A[i])):
+            if (i==0 and j==0) or (i==0 and j==len(A[i])-1) or (i==len(A)-1 and j==0) or (i==len(A)-1 and j==len(A[i])-1):
+                sa+=A[i][j]*2
+            elif i==0 or j==0 or i==len(A)-1 or j==len(A[i])-1:
+                sa+=A[i][j]
+            if j+1<len(A[0]) and A[i][j]>A[i][j+1]: 
+                sa+=A[i][j]-A[i][j+1]
+            if j-1>=0 and A[i][j]>A[i][j-1]:
+                sa+=A[i][j]-A[i][j-1]
+            if i+1<len(A) and A[i][j]>A[i+1][j]:
+                sa+=A[i][j]-A[i+1][j]
+            if i-1>=0 and A[i][j]>A[i-1][j]:
+                sa+=A[i][j]-A[i-1][j]
+            print(sa)
+            print("xxxxxx")
+    return(sa)
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    H = int(first_multiple_input[0])
+
+    W = int(first_multiple_input[1])
+
+    A = []
+
+    for _ in range(H):
+        A.append(list(map(int, input().rstrip().split())))
+
+    result = surfaceArea(A)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
