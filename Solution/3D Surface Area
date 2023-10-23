@@ -8,6 +8,8 @@ Input Format
 The first line contains two space-separated integers  and  the height and the width of the board respectively.
 
 The next  lines contains  space separated integers. The  integer in  line denotes .
+
+
 '''
 #!/bin/python3
 
@@ -27,16 +29,16 @@ import sys
 def surfaceArea(A):
     # Write your code here
     if len(A)==1 and len(A[0])==1:
-        return 4*A[0][0]+2
-    sa=len(A)*len(A[0])*2
-    if len(A)==1 or len(A[0])==1:
+        return 4*A[0][0]+2 #case 1: no cubes on all the four sides 
+    sa=len(A)*len(A[0])*2 #surface are of top and bottom
+    if len(A)==1 or len(A[0])==1: #case 2: 1 cube on the side of the corner piece
         for i in range(len(A)):
             for j in range(len(A[i])):
                 if (i==0 and j==0) or (i==0 and j==len(A[i])-1) or (i==len(A)-1 and j==0) or (i==len(A)-1 and j==len(A[i])-1):
-                    sa+=A[i][j]*3 
+                    sa+=A[i][j]*3 #the sides of the corner piece which are exposed is always *3 (excluding top and bottom)
                 elif i==0 or j==0 or i==len(A)-1 or j==len(A[i])-1:
-                    sa+=A[i][j]*2
-                if j+1<len(A[0]) and A[i][j]>A[i][j+1]: 
+                    sa+=A[i][j]*2 #the edge piece will have 2 piece exposed always
+                if j+1<len(A[0]) and A[i][j]>A[i][j+1]: #if the next cube is smaller than the current cube, then next-current sides are also exposed(exclude top and bottom)
                     sa+=A[i][j]-A[i][j+1]
                 if j-1>=0 and A[i][j]>A[i][j-1]:
                     sa+=A[i][j]-A[i][j-1]
@@ -46,13 +48,13 @@ def surfaceArea(A):
                     sa+=A[i][j]-A[i-1][j]
         return (sa)                 
     
-    for i in range(len(A)):
+    for i in range(len(A)): #case 3: 2 cubes on 2 sides of the corner piece
         for j in range(len(A[i])):
             if (i==0 and j==0) or (i==0 and j==len(A[i])-1) or (i==len(A)-1 and j==0) or (i==len(A)-1 and j==len(A[i])-1):
                 sa+=A[i][j]*2
             elif i==0 or j==0 or i==len(A)-1 or j==len(A[i])-1:
                 sa+=A[i][j]
-            if j+1<len(A[0]) and A[i][j]>A[i][j+1]: 
+            if j+1<len(A[0]) and A[i][j]>A[i][j+1]: #if the next cube is smaller than the current cube, then next-current sides are also exposed(exclude top and bottom)
                 sa+=A[i][j]-A[i][j+1]
             if j-1>=0 and A[i][j]>A[i][j-1]:
                 sa+=A[i][j]-A[i][j-1]
