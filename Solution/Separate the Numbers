@@ -1,0 +1,59 @@
+'''
+A numeric string, , is beautiful if it can be split into a sequence of two or more positive integers, , satisfying the following conditions:
+
+ for any  (i.e., each element in the sequence is  more than the previous element).
+No  contains a leading zero. For example, we can split  into the sequence , but it is not beautiful because  and  have leading zeroes.
+The contents of the sequence cannot be rearranged. For example, we can split  into the sequence , but it is not beautiful because it breaks our first constraint (i.e., ).
+The diagram below depicts some beautiful strings:
+
+image
+
+Perform  queries where each query consists of some integer string . For each query, print whether or not the string is beautiful on a new line. If it is beautiful, print YES x, where  is the first number of the increasing sequence. If there are multiple such values of , choose the smallest. Otherwise, print NO.
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'separateNumbers' function below.
+#
+# The function accepts STRING s as parameter.
+#
+
+def separateNumbers(s):
+    # Write your code here
+    if len(s)==1: #if the length os string is less than 1 always print NO
+        print("NO")
+    else:
+        flag=0
+        for i in range(len(s)//2): #iterate over half the string
+            flag1=0
+            val= s[:i+1] #set the current value
+            next_val=str(int(val)+1) #set the next value. We are expecting the next value to be next_val
+            j=i+1
+            while j<len(s): 
+                if s[j:j+len(next_val)] != next_val: #check if next value in the string is same as next_val
+                    flag1=1 #to dermine that the loop has exited through break, set flag1
+                    break
+                j+=len(next_val) 
+                next_val=str(int(next_val)+1) #set the next value            
+            if j>=len(s)-len(next_val) and flag1==0: #there will be 2 condition for j loop to exit. Either by break or after finishing the j loop. Hence checking the flag
+                flag=1
+                break
+        if flag==1:
+            print(f"YES {val}")
+        else:
+            print("NO")
+    
+if __name__ == '__main__':
+    q = int(input().strip())
+
+    for q_itr in range(q):
+        s = input()
+
+        separateNumbers(s)
