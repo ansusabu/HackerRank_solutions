@@ -1,0 +1,47 @@
+'''
+Marc loves cupcakes, but he also likes to stay fit. Each cupcake has a calorie count, and Marc can walk a distance to expend those calories. If Marc has eaten  cupcakes so far, after eating a cupcake with  calories he must walk at least  miles to maintain his weight.
+
+Example
+
+If he eats the cupcakes in the order shown, the miles he will need to walk are . This is not the minimum, though, so we need to test other orders of consumption. In this case, our minimum miles is calculated as .
+
+Given the individual calorie counts for each of the cupcakes, determine the minimum number of miles Marc must walk to maintain his weight. Note that he can eat the cupcakes in any order.
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'marcsCakewalk' function below.
+#
+# The function is expected to return a LONG_INTEGER.
+# The function accepts INTEGER_ARRAY calorie as parameter.
+#
+
+def marcsCakewalk(calorie):
+    # Write your code here
+    calorie.sort(reverse=True) #sorting it in descending helps to find the leaset miles
+    j=0
+    total_miles=0
+    for item in calorie:
+        total_miles+=(2**j)*item
+        j+=1
+    return total_miles
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    calorie = list(map(int, input().rstrip().split()))
+
+    result = marcsCakewalk(calorie)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
