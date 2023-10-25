@@ -1,0 +1,49 @@
+'''
+The previous challenges covered Insertion Sort, which is a simple and intuitive sorting algorithm with a running time of . In these next few challenges, we're covering a divide-and-conquer algorithm called Quicksort (also known as Partition Sort). This challenge is a modified version of the algorithm that only addresses partitioning. It is implemented as follows:
+
+Step 1: Divide
+Choose some pivot element, , and partition your unsorted array, , into three smaller arrays: , , and , where each element in , each element in , and each element in .
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'quickSort' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
+def quickSort(arr):
+    # Write your code here
+    small_arr=[] #array defined to store elements less than pivot
+    large_arr=[] #array ddefined to store elements greater than pivot
+    pivot = arr[0] #set pivot to the 1st array element
+    for item in arr:
+        if item<pivot: #if the element is less than pivot, add it to the small_arr
+            small_arr.append(item)
+        elif item>pivot: #if element is greater than pivot, add it to the large arra
+            large_arr.append(item)
+
+    sort_arr=small_arr+[pivot]+large_arr   # add pivot in between both smaal and large array
+    return sort_arr
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = quickSort(arr)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
