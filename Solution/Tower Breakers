@@ -1,0 +1,54 @@
+'''
+Two players are playing a game of Tower Breakers! Player  always moves first, and both players always play optimally.The rules of the game are as follows:
+
+Initially there are  towers n.
+Each tower is of height m.
+The players move in alternating turns.
+In each turn, a player can choose a tower of height  and reduce its height to , where  and  evenly divides .
+If the current player is unable to make a move, they lose the game.
+Given the values of  and , determine which player will win. If the first player wins, return . Otherwise, return .
+'''
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'towerBreakers' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. INTEGER m
+#
+
+def towerBreakers(n, m):
+    # Write your code here
+    if m==1: #if the height of the tower is 1, then 1st player won't be able to do any changes hence 2 wins
+        return 2
+    if n%2==1: #if the no of towers are odd, player 2 will do the same moves as player 1 until the last tower, where player 1 will be able to move but not player 2
+        return 1
+    if n%2==0: #if the no of towers are even, the payer 2 do the same moves as of player 1
+        return 2 
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input().strip())
+
+    for t_itr in range(t):
+        first_multiple_input = input().rstrip().split()
+
+        n = int(first_multiple_input[0])
+
+        m = int(first_multiple_input[1])
+
+        result = towerBreakers(n, m)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
