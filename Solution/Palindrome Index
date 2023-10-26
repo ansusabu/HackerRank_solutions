@@ -1,0 +1,52 @@
+'''
+Given a string of lowercase letters in the range ascii[a-z], determine the index of a character that can be removed to make the string a palindrome. There may be more than one solution, but any will do. If the word is already a palindrome or there is no solution, return -1. Otherwise, return the index of a character to remove.
+'''
+
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'palindromeIndex' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts STRING s as parameter.
+#
+
+def palindromeIndex(s):
+    # Write your code here
+    if s==s[::-1]:
+        return -1
+    first_val=0 #assign the first index
+    last_val=len(s)-1 #assign the last index
+    while first_val<last_val: #check until middle of the string
+        if s[first_val]!=s[last_val]: #check if the firt value and last value are not same
+            s1=s[:first_val]+s[first_val+1:] #remove first char and see if the string is palindrome
+            if s1==s1[::-1]:
+                return first_val #if the string is palindrome return first val
+            s1=s[:last_val]+s[last_val+1:] #remove last char and see if the string is not palindrom
+            if s1==s1[::-1]:
+                return last_val #if the string is palindrome return last val
+            break #if removing the single character doesn't make it a palindrome break and return -1
+        first_val+=1
+        last_val-=1
+    return -1
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input().strip())
+
+    for q_itr in range(q):
+        s = input()
+
+        result = palindromeIndex(s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
