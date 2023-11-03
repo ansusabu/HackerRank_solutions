@@ -21,13 +21,21 @@
 
 **Logic**: This problem is solved using longest common subsequence algorithm
 
-## 4.Connected Cells in a Grid
+## 4.Separate the Numbers
 
-[Problem](https://www.hackerrank.com/challenges/connected-cell-in-a-grid/problem)
+[Problem](https://www.hackerrank.com/challenges/separate-the-numbers/problem)
 
-[Solution](https://github.com/ansusabu/HackerRank_solutions/blob/main/Solution/Connected%20Cells%20in%20a%20Grid)
+[Solution](https://github.com/ansusabu/HackerRank_solutions/blob/main/Solution/Separate%20the%20Numbers)
 
-**Logic**: 
+**Logic**: Take the first char and add one to it and check if the next number is same as expected. If the next number is same as expected, do the same and look if the numbers are same as our expected value. If the next number is not the one we expected, then take 2 values together and check. Do until half the string
+
+## 5.Tower Breakers
+
+[Problem](https://www.hackerrank.com/challenges/tower-breakers-1/problem)
+
+[Solution](https://github.com/ansusabu/HackerRank_solutions/blob/main/Solution/Tower%20Breakers)
+
+**Logic**:If the height of the tower is 1, then 1st player won't be able to do any changes hence 2 wins. If the no of towers are odd, player 2 will do the same moves as player 1 until the last tower, where player 1 will be able to move but not player 2. If the no of towers are even, the payer 2 do the same moves as of player 1 and player 2 wins as he is the one who will be moving the last tower
 
 
 ## 10. 3D Surface Area
